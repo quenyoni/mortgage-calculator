@@ -1,0 +1,137 @@
+
+.form{
+    display: grid;
+    gap:1rem;
+    padding: 1rem;
+    
+    .joint__group{
+        display: grid;
+        gap:1rem;
+        
+        @include tab{
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    &__group{
+        display: grid;
+        gap:0.25rem;
+        
+        label{
+            color: $s7;
+            
+            
+        }
+        
+        .input__wrapper{
+            border: 1px solid $s3; 
+            border: 1px solid transparent;
+            position: relative;
+            border-radius: 10px;
+            
+        }
+        
+        .amount{
+            @extend .input__wrapper;
+            .input{
+                border-radius: 10px;
+                padding: .75rem ; 
+                width: 100%;
+                padding-left: 3rem;
+                outline: none;
+                border: 1px solid $s3; 
+                transition: all 400ms ease-in;
+                
+                &:focus{
+                    border: 1px solid $primary; 
+                }
+           
+            
+        }
+                
+               
+        
+            
+           
+           
+            
+            
+                
+                
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+        .input{
+            background:transparent;
+            
+            &__amount{
+                padding-left: 3.5rem;
+             
+                }
+            }
+            
+            // &__wrapper{
+            //     position: relative;
+            //     border-radius: 5px;
+            //     overflow: hidden;
+                
+            //     // &::before{
+            //     //     position: absolute;
+            //     //     height: 100%;
+            //     //     width: 3rem;
+            //     //     color:$s9;
+            //     //     display: grid;
+            //     //     place-content: center;
+            //     //     content: '$';
+            //     //     left:0;
+            //     //     background: $bg-main;
+            //     //     z-index: 10;
+                    
+                    
+            //     // }
+                
+            //     // &:hover{
+            //     //     background: #000;
+            //     // }
+                
+                
+                
+            //     
+                
+            //     .input{
+            //         border: none;
+            //         width: 100%;
+            //         outline: none;
+            //         &:focus{
+            //             .input__wrapper{
+                            
+            //                 border: 1px solid $primary;
+            //             }
+            //         }
+            //     }
+            // }
+            // padding: .75rem ;
+          
+            // border-radius: 5px;
+            // color:$s9;
+            // outline: none;
+            // position: relative;
+            
+      
+            
+        
+            
+            // &.warning{
+            //     border: 1px solid $danger;
+            // }
+            
+          
+        }
+    }

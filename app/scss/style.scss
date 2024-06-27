@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import 'variables';
+@import 'mixins';
+@import 'form';
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+
+body{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+main{
+    min-height: 100vh;
+    background: $bg-main;
+   
+    
+    @include desktop{
+        display: grid;
+        place-content: center;
+    }
+}
+
+
+.button{
+    padding: .75rem ;
+    font-family: inherit;
+    border:none;
+    border-radius: 20px;
+    
+     
+    
+    &--primary{
+        background-color:$primary;
+        color:$s9;
+        font-weight: 700;
+        letter-spacing:1px;
+    }
+}
+
+
+.container{
+    margin-inline: auto;
+    max-width: 768px;
+    background: $white;
+    width: 100%;
+    
+    @include tab{
+        
+        border-radius: 16px;
+    }
+    // padding:1rem;
+    
+}
+
+
+.app{
+    
+    display: grid;
+    
+    .header{
+        display: flex;
+        flex-direction: column;
+        gap:0.5rem;
+        padding: 1rem;
+        
+        h1{
+            font-size:1.25rem;
+            color:$s9;
+            font-weight: 700;
+        }
+        
+        a{
+            color:$s9;
+            cursor: pointer;
+        }
+        
+        @include desktop{
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    
+    @include desktop{
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    &__results{
+        height: 100%;
+        background: $s9;
+        
+        @include desktop{
+            border-bottom-left-radius: 30px;
+        }
+    }
+    
+    .results__empty{
+        
+     
+     
+      
+        
+    }
+}
