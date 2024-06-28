@@ -1,6 +1,23 @@
 import Form from "./components/Form";
 import Image from "next/image";
 export default function Home() {
+	function calcMortgage(
+		principal,
+		annual_rate,
+		years,
+	) {
+		//Convert annual interest rate to monthly and from percentage;
+		const monthly_rate = annual_rate / (12 * 100);
+		//Calculate the number of monthly payments;
+		const total_payments = years * 12;
+		//Calculate the monthly payment using the formula;
+		return (
+			(principal *
+				(monthly_rate *
+					(1 + monthly_rate) ** total_payments)) /
+			((1 + monthly_rate) ** total_payments - 1)
+		);
+	}
 	return (
 		<main>
 			<div className='container'>

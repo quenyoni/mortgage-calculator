@@ -5,57 +5,151 @@
 
 .form {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 1rem;
 }
-.form .joint__group {
+.form .form__group {
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+}
+.form .form__group .wrapper, .form .form__group .right__wrapper.input__rates, .form .form__group .right__wrapper.input__years, .form .form__group .left__wrapper {
+  overflow: hidden;
+  border-radius: 5px;
+  position: relative;
+}
+.form .form__group .left__wrapper:before {
+  position: absolute;
+  padding: 0 0.25rem;
+  content: "$";
+  display: grid;
+  color: hsl(200, 24%, 40%);
+  place-content: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #dcedf7;
+  width: 3rem;
+  z-index: 5;
+}
+.form .form__group .right__wrapper.input__years:before {
+  position: absolute;
+  content: "years";
+  display: grid;
+  color: hsl(200, 24%, 40%);
+  padding: 0 0.25rem;
+  place-content: center;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background: #dcedf7;
+  width: 3rem;
+  z-index: 5;
+}
+.form .form__group .right__wrapper.input__rates:before {
+  position: absolute;
+  content: "%";
+  display: grid;
+  color: hsl(200, 24%, 40%);
+  padding: 0 0.25rem;
+  place-content: center;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background: #dcedf7;
+  width: 3rem;
+  z-index: 5;
+}
+.form .group__items {
   display: grid;
   gap: 1rem;
 }
-@media (min-width: 768px) {
-  .form .joint__group {
+@media (min-width: 1440px) {
+  .form .group__items {
     grid-template-columns: 1fr 1fr;
   }
 }
-.form__group {
-  display: grid;
-  gap: 0.25rem;
-}
-.form__group label {
-  color: hsl(200, 24%, 40%);
-}
-.form__group .input__wrapper {
-  border: 1px solid hsl(203, 41%, 72%);
-  border: 1px solid transparent;
-  position: relative;
-  border-radius: 10px;
-}
-.form__group .input__wrapper:before > .input__amount {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 3rem;
-  height: 100%;
-  background: #000;
-  content: "";
-}
-.form__group .input__wrapper .input {
-  border-radius: 10px;
-  padding: 0.75rem;
+.form .input {
+  padding: 0.5rem;
   width: 100%;
-  padding-left: 3rem;
+  border: 1.5px solid hsl(203, 41%, 72%);
   outline: none;
-  border: 1px solid hsl(203, 41%, 72%);
-  transition: all 400ms ease-in;
-}
-.form__group .input__wrapper .input:focus {
-  border: 1px solid hsl(61, 70%, 52%);
-}
-.form__group .input {
   background: transparent;
 }
-.form__group .input__amount {
+.form .input:focus {
+  border: 1.5px solid hsl(61, 70%, 52%);
+}
+.form .input__amount {
   padding-left: 3.5rem;
+}
+.form .radio__group {
+  display: grid;
+  gap: 1.5rem;
+}
+.form .radio__group > input[type=radio] {
+  opacity: 0.5;
+}
+.form .radio__group .radio__wrapper {
+  background: hsl(61, 70%, 52%);
+  padding: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.form .radio__group .radio-label {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid hsl(203, 41%, 72%);
+  color: hsl(202, 55%, 16%);
+  transition: all ease-in-out;
+  border-radius: 10px;
+}
+.form .radio__group .radio-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid hsl(200, 24%, 40%);
+  border-radius: 50%;
+  margin-right: 10px;
+  padding: 1px;
+  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  background: transparent;
+  position: relative;
+}
+.form .radio__group .radio-circle::before {
+  content: "";
+  width: 60%;
+  height: 60%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border-radius: 50%;
+  position: absolute;
+}
+.form .radio__group .radio-text {
+  font-size: 1rem;
+  color: hsl(200, 24%, 40%);
+  transition: color 0.3s ease-in-out;
+}
+.form .radio__group input[type=radio]:checked + .radio-label {
+  background-color: #fafae0;
+  border: 1px solid hsl(61, 70%, 52%);
+}
+.form .radio__group input[type=radio]:hover + .radio-label {
+  border: 1px solid hsl(61, 70%, 52%);
+}
+.form .radio__group input[type=radio]:checked + .radio-label .radio-circle {
+  border-color: hsl(61, 70%, 52%);
+  background-color: transparent;
+}
+.form .radio__group input[type=radio]:checked + .radio-label .radio-circle:before {
+  background: hsl(61, 70%, 52%);
+}
+.form .radio__group input[type=radio]:checked + .radio-label .radio-text {
+  color: hsl(202, 55%, 16%);
 }
 
 * {
