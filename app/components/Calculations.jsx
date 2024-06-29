@@ -33,7 +33,7 @@ function Calculations({ payments }) {
 					</div>
 					<div>
 						<p>
-							Total you'll repay over the term
+							Total to repay over the term
 						</p>
 						<h3>
 							{formatCurrency(
