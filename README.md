@@ -9,8 +9,8 @@ This is my solution to the [Mortgage repayment calculator challenge on Frontend 
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
-- - [Built with](#built-with)
-- [Author](#author)
+- [Built with](#built-with)
+
 
 
 ## Overview
@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Add solution URL here](https://github.com/quenyoni/mortgage-calculator)
+- Live Site URL: [Add live site URL here](https://mortgage-calculator-ten-chi.vercel.app/)
 
 ## My process
 
