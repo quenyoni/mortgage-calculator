@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/quenyoni/mortgage-calculator)
-- Live Site URL: [Add live site URL here](https://mortgage-calculator-ten-chi.vercel.app/)
+- Solution URL: [Github](https://github.com/quenyoni/mortgage-calculator)
+- Live Site URL: [Live Site](https://mortgage-calculator-ten-chi.vercel.app/)
 
 ## My process
 
