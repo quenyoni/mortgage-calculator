@@ -1,26 +1,112 @@
 "use client";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useState } from "react";
 import Form from "./components/Form";
+import { useForm } from "react-hook-form";
 import FormVal from "./components/FormVal";
-import Image from "next/image";
+import Calculations from "./components/Calculations";
+import NoResults from "./components/NoResults";
+
+const schema = yup
+	.object({
+		mortgageAmount: yup
+			.number()
+			.positive()
+			.required(),
+		mortgageTerms: yup
+			.number()
+			.positive()
+			.required(),
+		interestRate: yup
+			.number()
+			.positive()
+			.required(),
+	})
+	.required();
+
 export default function Home() {
-	const [results, setResults] = useState(true);
-	function calcMortgage(
+	const [results, setResults] = useState(false);
+	const [payments, setRepayments] = useState({
+		monthlyPayment: 0,
+		totalRepayment: 0,
+	});
+	const {
+		register,
+		handleSubmit,
+		resetField,
+		watch,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
+
+	const onSubmit = (data) => {
+		// console.log(errors, data);
+		const {
+			mortgageAmount,
+			mortgageTerms,
+			interestRate,
+			mortgageType,
+		} = data;
+		const monthlyPayment =
+			calculateMonthlyRepayment(
+				mortgageAmount,
+				interestRate,
+				mortgageTerms,
+				mortgageType,
+			).toFixed(2);
+
+		setRepayments({
+			monthlyPayment,
+			totalRepayment:
+				monthlyPayment * mortgageTerms * 12,
+		});
+
+		setResults(true);
+	};
+
+	function calculateMonthlyRepayment(
 		principal,
-		annual_rate,
-		years,
+		annualInterestRate,
+		termYears,
+		mortgageType,
 	) {
-		//Convert annual interest rate to monthly and from percentage;
-		const monthly_rate = annual_rate / (12 * 100);
-		//Calculate the number of monthly payments;
-		const total_payments = years * 12;
-		//Calculate the monthly payment using the formula;
-		return (
-			(principal *
-				(monthly_rate *
-					(1 + monthly_rate) ** total_payments)) /
-			((1 + monthly_rate) ** total_payments - 1)
-		);
+		console.log(mortgageType);
+		if (mortgageType == "repayments") {
+			const monthlyInterestRate =
+				annualInterestRate / 100 / 12;
+			const numberOfPayments = termYears * 12;
+
+			const monthlyPayment =
+				(principal *
+					(monthlyInterestRate *
+						Math.pow(
+							1 + monthlyInterestRate,
+							numberOfPayments,
+						))) /
+				(Math.pow(
+					1 + monthlyInterestRate,
+					numberOfPayments,
+				) -
+					1);
+
+			return monthlyPayment;
+		}
+
+		const monthlyInterestRate =
+			annualInterestRate / 100 / 12;
+
+		return principal * monthlyInterestRate;
+	}
+
+	function handleClear(e) {
+		e.preventDefault();
+		resetField("mortgageAmount");
+		resetField("mortgageType");
+		resetField("interestRate");
+		resetField("mortgageTerms");
+		setResults(false);
 	}
 
 	return (
@@ -30,70 +116,29 @@ export default function Home() {
 					<div className='app__main'>
 						<header className='header'>
 							<h1>Mortgage Calculator</h1>
-							<a href=''>Clear All</a>
+							<button
+								className='button'
+								onClick={handleClear}>
+								Clear All
+							</button>
 						</header>
 
-						<Form />
+						<Form
+							register={register}
+							handleSubmit={handleSubmit}
+							onSubmit={onSubmit}
+							watch={watch}
+							errors={errors}
+						/>
 					</div>
 					<div className='app__results'>
 						{!results && <NoResults />}
-						{results && <Calculations />}
+						{results && (
+							<Calculations payments={payments} />
+						)}
 					</div>
 				</div>
 			</div>
-			{/* <FormVal /> */}
 		</main>
-	);
-}
-
-// {		. Your monthly
-//   repayments Total you'll repay over the term}
-
-function Calculations() {
-	return (
-		<div className='app__results__calculations'>
-			<div className='app__results__calculations__header'>
-				<h2>Your results</h2>
-				<p>
-					Your results Your results are shown
-					below based on the information you
-					provided. To adjust the results, edit
-					the form and click “calculate
-					repayments” again
-				</p>
-			</div>
-			<div>
-				<div className='app__results__calculations__item'>
-					<div>
-						<p>Your monthly repayments</p>
-						<h1>$1,797.74</h1>
-					</div>
-					<div>
-						<p>
-							Total you'll repay over the term
-						</p>
-						<h3>$539,322.94</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-}
-
-function NoResults() {
-	return (
-		<div class='results__empty'>
-			<Image
-				width={100}
-				height={100}
-				src='/assets/images/illustration-empty.svg'
-			/>
-			<h3>Results shown here</h3>
-			<p className='paragraphs'>
-				Complete the form and click “calculate
-				repayments” to see what your monthly
-				repayments would be.
-			</p>
-		</div>
 	);
 }

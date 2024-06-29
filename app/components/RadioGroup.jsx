@@ -3,6 +3,8 @@
 function RadioGroup({
 	handleOptionChange,
 	selectedOption,
+	register,
+	err,
 }) {
 	return (
 		<div className='radio__group'>
@@ -10,9 +12,12 @@ function RadioGroup({
 				type='radio'
 				id='radio-1'
 				name='tabs'
-				value='option1'
-				checked={selectedOption === "option1"}
+				value='repayments'
+				checked={selectedOption === "repayments"}
 				onChange={handleOptionChange}
+				{...register("mortgageType", {
+					required: true,
+				})}
 			/>
 			<label
 				className='radio-label'
@@ -26,9 +31,14 @@ function RadioGroup({
 				type='radio'
 				id='radio-2'
 				name='tabs'
-				value='option2'
-				checked={selectedOption === "option2"}
+				value='interestOnly'
+				checked={
+					selectedOption === "interestOnly"
+				}
 				onChange={handleOptionChange}
+				{...register("mortgageType", {
+					required: true,
+				})}
 			/>
 			<label
 				className='radio-label'
@@ -38,6 +48,11 @@ function RadioGroup({
 					Interest Only
 				</span>
 			</label>
+			<div className='error__wrapper'>
+				{err && (
+					<span>This field is required</span>
+				)}
+			</div>
 		</div>
 	);
 }
