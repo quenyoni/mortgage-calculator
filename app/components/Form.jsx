@@ -1,36 +1,74 @@
 "use client";
+import FormGroup from "./FormGroup";
 import RadioGroup from "./RadioGroup";
 import { useState } from "react";
 import Image from "next/image";
 
-export default function Form() {
-	const [selectedOption, setSelectedOption] =
-		useState("");
+export default function Form({
+	handleSubmit,
+	onSubmit,
+	register,
+	watch,
+	errors,
+}) {
+	const {
+		mortgageAmount: amt,
+		mortgageTerms: terms,
+		interestRate: ir,
+		mortgageType: option,
+	} = errors;
+
+	const selectedOption = watch(
+		"mortgageType",
+		"repayment",
+	);
 
 	const handleOptionChange = (event) => {
 		setSelectedOption(event.target.value);
 	};
+
 	return (
-		<form className='form' action=''>
+		<form
+			className='form'
+			action=''
+			onSubmit={handleSubmit(onSubmit)}>
 			<div className='form__group'>
-				<label for=''>Mortgage Amount</label>
-				<FormGroup left={true} lb={"$"} />
+				<label>Mortgage Amount</label>
+				<FormGroup
+					left={true}
+					lb={"$"}
+					register={register}
+					purpose={"mortgageAmount"}
+					err={amt}
+				/>
 			</div>
 			<div className='group__items'>
 				<div className='group__item'>
-					<label for=''>Mortgage Term</label>
-					<FormGroup lb={"years"} />
+					<label>Mortgage Term</label>
+					<FormGroup
+						lb={"years"}
+						purpose={"mortgageTerms"}
+						register={register}
+						err={terms}
+					/>
 				</div>
 				<div className='group__item'>
-					<label for=''>Interest Rate</label>
-					<FormGroup lb={"%"} />
+					<label>Interest Rate</label>
+					<FormGroup
+						lb={"%"}
+						purpose={"interestRate"}
+						register={register}
+						err={ir}
+					/>
 				</div>
 			</div>
 			<div className='form__group'>
-				<label for=''>Mortgage Type</label>
+				<label>Mortgage Type</label>
 				<RadioGroup
+					register={register}
 					handleOptionChange={handleOptionChange}
 					selectedOption={selectedOption}
+					err={option}
 				/>
 			</div>
 			<button
@@ -39,45 +77,11 @@ export default function Form() {
 				<Image
 					width={20}
 					height={20}
+					alt='Calculator image'
 					src='/assets/images/icon-calculator.svg'
 				/>
 				<span>Calculate Repayments</span>
 			</button>
 		</form>
-	);
-}
-
-function FormGroup({ error, left = false, lb }) {
-	const [isFocused, setIsFocused] =
-		useState(false);
-
-	function handleFocus() {
-		setIsFocused((t) => !t);
-	}
-
-	return (
-		<div
-			className={`form__group__new ${
-				left ? "" : "row__reverse"
-			}`}>
-			<label
-				className={`text__label ${
-					isFocused ? "active" : ""
-				} ${error ? "error" : ""}  
-				${left ? "" : "right"}`}
-				for=''>
-				{lb}
-			</label>
-			<input
-				className={`${error ? "error" : ""} ${
-					left ? "" : "right"
-				}`}
-				type='text'
-				name=''
-				id='years'
-				onFocus={handleFocus}
-				onBlur={handleFocus}
-			/>
-		</div>
 	);
 }

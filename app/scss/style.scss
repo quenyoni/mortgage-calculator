@@ -34,12 +34,13 @@ main{
     padding: .75rem 1.5rem ;
     font-family: inherit;
     border:none;
+    background:transparent;
     border-radius: 20px;
     position:relative;
     display: flex;
     cursor: pointer;
     font-weight: 700;
-    border:1px solid  $primary;
+    border:1px solid  transparent;
     transition: all 400ms ease-in;
     
     @include tab{
@@ -53,12 +54,36 @@ main{
     &--primary{
         background-color:$primary;
         color:$s9;
-      
+        overflow: hidden;
+      z-index:10;
         letter-spacing:1px;
         
-        &:hover{
-            background-color: $bg--btn--hover
+      
+        
+        &:before{
+            content: "";
+            position: absolute;
+            top: 0;
+            height:200%;
+            width: 200%;
+            left: 0;
+            transform: translateX(-100%);
+           background-color:$primary;
+            transition: all 500ms  ease-in;
+            z-index: -1;
         }
+        
+     
+    }
+}
+
+
+.button--primary:hover{
+     background-color: transparent;
+    
+    &:before{
+         transform: translateX(0%);
+         background-color: $bg--btn--hover;
     }
 }
 
