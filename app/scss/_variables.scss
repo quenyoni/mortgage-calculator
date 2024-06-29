@@ -2,6 +2,7 @@
 $primary: hsl(61, 70%, 52%);
 $danger: hsl(4, 69%, 50%);
 $bg-main:#dcedf7;
+$bg--btn--hover: #fafae0;
 // ### Neutral
 
 $white: hsl(0, 0%, 100%);
@@ -10,8 +11,24 @@ $s3: hsl(203, 41%, 72%);
 $s5: hsl(200, 26%, 54%);
 $s7: hsl(200, 24%, 40%);
 $s9: hsl(202, 55%, 16%);
+$bg-results: hsl(202, 56%, 12%);
 
 
 .bold{
     font-weight: 700;
+}
+
+
+.flex{
+    display: flex;
+    gap:0.75rem;
+}
+
+.justify--center{
+    justify-content: center;
+   
+}
+
+.align--center{
+    align-items: center;
 }

@@ -1,5 +1,7 @@
 "use client";
+import RadioGroup from "./RadioGroup";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Form() {
 	const [selectedOption, setSelectedOption] =
@@ -12,37 +14,16 @@ export default function Form() {
 		<form className='form' action=''>
 			<div className='form__group'>
 				<label for=''>Mortgage Amount</label>
-				<div className='left__wrapper'>
-					<input
-						className='input input__amount'
-						type='text'
-						name=''
-						id=''
-					/>
-				</div>
+				<FormGroup left={true} lb={"$"} />
 			</div>
-			<div class='group__items'>
-				<div className='form__group'>
+			<div className='group__items'>
+				<div className='group__item'>
 					<label for=''>Mortgage Term</label>
-					<div class='right__wrapper input__years'>
-						<input
-							className='input years'
-							type='text'
-							name=''
-							id=''
-						/>
-					</div>
+					<FormGroup lb={"years"} />
 				</div>
-				<div className='form__group'>
+				<div className='group__item'>
 					<label for=''>Interest Rate</label>
-					<div class='right__wrapper input__rates'>
-						<input
-							className='input input__interest__rate'
-							type='text'
-							name=''
-							id=''
-						/>
-					</div>
+					<FormGroup lb={"%"} />
 				</div>
 			</div>
 			<div className='form__group'>
@@ -54,51 +35,49 @@ export default function Form() {
 			</div>
 			<button
 				type='submit'
-				className='button button--primary'>
-				Calculate Repayments
+				className='button button--primary flex  align--center justify--center'>
+				<Image
+					width={20}
+					height={20}
+					src='/assets/images/icon-calculator.svg'
+				/>
+				<span>Calculate Repayments</span>
 			</button>
 		</form>
 	);
 }
 
-function RadioGroup({
-	handleOptionChange,
-	selectedOption,
-}) {
+function FormGroup({ error, left = false, lb }) {
+	const [isFocused, setIsFocused] =
+		useState(false);
+
+	function handleFocus() {
+		setIsFocused((t) => !t);
+	}
+
 	return (
-		<div className='radio__group'>
-			<input
-				type='radio'
-				id='radio-1'
-				name='tabs'
-				value='option1'
-				checked={selectedOption === "option1"}
-				onChange={handleOptionChange}
-			/>
+		<div
+			className={`form__group__new ${
+				left ? "" : "row__reverse"
+			}`}>
 			<label
-				className='radio-label'
-				for='radio-1'>
-				<div className='radio-circle'></div>
-				<span className='radio-text'>
-					Repayments
-				</span>
+				className={`text__label ${
+					isFocused ? "active" : ""
+				} ${error ? "error" : ""}  
+				${left ? "" : "right"}`}
+				for=''>
+				{lb}
 			</label>
 			<input
-				type='radio'
-				id='radio-2'
-				name='tabs'
-				value='option2'
-				checked={selectedOption === "option2"}
-				onChange={handleOptionChange}
+				className={`${error ? "error" : ""} ${
+					left ? "" : "right"
+				}`}
+				type='text'
+				name=''
+				id='years'
+				onFocus={handleFocus}
+				onBlur={handleFocus}
 			/>
-			<label
-				className='radio-label'
-				for='radio-2'>
-				<div className='radio-circle'></div>
-				<span className='radio-text'>
-					Interest Only
-				</span>
-			</label>
 		</div>
 	);
 }
