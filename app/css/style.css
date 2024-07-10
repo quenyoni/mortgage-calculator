@@ -48,6 +48,7 @@
   padding: 1rem;
   position: relative;
   min-height: 450px;
+  border-bottom-left-radius:50px;
 }
 .app__results .results__empty {
   position: absolute;
