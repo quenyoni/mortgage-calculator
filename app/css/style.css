@@ -48,8 +48,26 @@
   padding: 1rem;
   position: relative;
   min-height: 450px;
-  border-bottom-left-radius:50px;
+
 }
+
+@media (min-width: 1440px) {
+.app__results {
+  background: hsl(202, 55%, 16%);
+  color: hsl(0, 0%, 100%);
+  padding: 1rem;
+  position: relative;
+  min-height: 450px;
+  border-bottom-left-radius:50px;
+
+}
+  
+}
+
+
+
+
+
 .app__results .results__empty {
   position: absolute;
   left: 50%;
